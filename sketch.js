@@ -5,7 +5,7 @@ var Cvar
 function setup() {
   createCanvas(CANVAS_WIDTH, CANVAS_WIDTH);
   Pvar = new player(200,200);
-  Mvar = new missle(CANVAS_WIDTH,CANVAS_WIDTH,Pvar);
+  Mvar = [new missle(CANVAS_WIDTH,CANVAS_WIDTH,Pvar)];
   Cvar = [new missleCluster(12,Pvar)];
   fire(5000);
 }
@@ -15,7 +15,9 @@ function draw() {
   fill(color(0,0,255))
   rect(Pvar.x,Pvar.y,5,5)
   fill(color(255,0,0))
-  Mvar.update();
+  for(let i = 0; i< Mvar.length;i++){
+  Mvar[0].update();
+  }
   for(let j = 0; j< Cvar.length;j++){
     for(let i = 0; i< Cvar[0].cluster.length;i++){
       Cvar[j].cluster[i].update();
