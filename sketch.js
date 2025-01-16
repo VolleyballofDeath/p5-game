@@ -107,7 +107,7 @@ function fire(time){
   Cvar.push(new missleCluster(12,Pvar));
   setTimeout(() => fire(newtime), newtime)
   if(Cvar.length > 100){
-  Cvar.pop();
+  Cvar.shift();
 }
 }
 
