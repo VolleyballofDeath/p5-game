@@ -5,7 +5,7 @@ var Cvar
 function setup() {
   createCanvas(CANVAS_WIDTH, CANVAS_WIDTH);
   Pvar = new player(200,200);
-  Mvar = new missle(100,100,Pvar);
+  Mvar = new missle(CANVAS_WIDTH,CANVAS_WIDTH,Pvar);
   Cvar = [new missleCluster(12,Pvar)];
   fire(5000);
 }
