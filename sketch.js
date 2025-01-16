@@ -16,7 +16,7 @@ function draw() {
   rect(Pvar.x,Pvar.y,5,5)
   fill(color(255,0,0))
   for(let i = 0; i< Mvar.length;i++){
-  Mvar[0].update();
+  Mvar[i].update();
   }
   for(let j = 0; j< Cvar.length;j++){
     for(let i = 0; i< Cvar[0].cluster.length;i++){
@@ -83,8 +83,8 @@ class missleCluster{
 constructor(num,target){
   this.cluster = [];
   let angle = atan2((target.y-0),(target.x-0));
-  this.x = CANVAS_WIDTH*2*cos(angle);
-  this.y = CANVAS_WIDTH*2*sin(angle);
+  this.x = CANVAS_WIDTH*1.5*cos(angle);
+  this.y = CANVAS_WIDTH*1.5*sin(angle);
   for(let i = 0; i<num;i++){
     this.cluster.push(new missle(0,0,this))
   }
@@ -102,14 +102,24 @@ class enemy{
   }
 }
 function fire(time){
-  let newtime = time-100;
+  let newtime = time*0.9;
   if(newtime<=150){
     newtime = 150;
   }
   Cvar.push(new missleCluster(12,Pvar));
+  if(random()>0.6){
+    Mvar.push(new missle(CANVAS_WIDTH,CANVAS_WIDTH,Pvar));
+  }
   setTimeout(() => fire(newtime), newtime)
   if(Cvar.length > 100){
   Cvar.shift();
 }
+  if(Mvar.length>60){
+    if(random()>0.6){
+      Mvar.shift();
+    }else{
+    Mvar.pop();
+  }
+  }
 }
 
