@@ -74,8 +74,8 @@ class missle{
   }
   update(){
     let angle = atan2((this.target.y-this.y),(this.target.x-this.x))
-    this.x+=3.9*cos(angle);
-    this.y+=3.9*sin(angle);
+    this.x+=3*cos(angle);
+    this.y+=3*sin(angle);
     rect(this.x,this.y,5,5);
   }
 }
