@@ -2,12 +2,20 @@ let CANVAS_WIDTH = 800;
 var Pvar
 var Mvar
 var Cvar
+var time_alive=0;
+var timerText
 function setup() {
   createCanvas(CANVAS_WIDTH, CANVAS_WIDTH);
   Pvar = new player(200,200);
   Mvar = [new missle(CANVAS_WIDTH,CANVAS_WIDTH,Pvar)];
   Cvar = [new missleCluster(12,Pvar)];
   fire(5000);
+  setInterval(timer,1);
+  time_alive = 0;
+}
+function timer(){
+  //time_alive=(Math.round((1000*(time_alive0+0.001))))/1000
+  time_alive +=0.001
 }
 function draw() {
   background(220);
@@ -23,6 +31,9 @@ function draw() {
       Cvar[j].cluster[i].update();
     }
   }
+  fill(color(0,0,0));
+  timerText = text(time_alive.toFixed(3), 50, 50);
+  fill(color(255,0,0));
 }
 class player{
   constructor(x,y){
@@ -102,7 +113,7 @@ class enemy{
   }
 }
 function fire(time){
-  let newtime = time*0.9;
+  let newtime = time*0.95;
   if(newtime<=150){
     newtime = 150;
   }
