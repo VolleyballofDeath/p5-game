@@ -126,11 +126,7 @@ function fire(time){
   Cvar.shift();
 }
   if(Mvar.length>60){
-    if(random()>0.6){
       Mvar.shift();
-    }else{
-    Mvar.pop();
-  }
   }
 }
 
