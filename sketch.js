@@ -83,7 +83,7 @@ class player{
   this.y = constrain(this.y,0,CANVAS_WIDTH-5);
 }
 }
-class missle{
+class missle{//use dist();
   constructor(x,y,target){
     this.x=x+random(-30,30);
     this.y=y+random(-30,30);
