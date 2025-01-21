@@ -16,6 +16,12 @@ function setup() {
 function timer(){
   //time_alive=(Math.round((1000*(time_alive0+0.001))))/1000
   time_alive +=0.001
+
+  if(localStorage.getItem("time")==null){
+    localStorage.setItem("time",time_alive);
+  }else if(localStorage.getItem("time")<time_alive){
+    localStorage.setItem("time",time_alive);
+  }
 }
 function draw() {
   background(220);
