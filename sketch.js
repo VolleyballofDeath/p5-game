@@ -39,6 +39,7 @@ function draw() {
   }
   fill(color(0,0,0));
   timerText = text(time_alive.toFixed(3), 50, 50);
+  HighSocreText = text(Number(localStorage.getItem("time")).toFixed(3),50,70)
   fill(color(255,0,0));
 }
 class player{
@@ -84,7 +85,7 @@ class player{
 }
 }
 class missle{//use dist();
-  constructor(x,y,target){
+  constructor(x,y,target){ 
     this.x=x+random(-30,30);
     this.y=y+random(-30,30);
     this.target = target;
@@ -94,6 +95,9 @@ class missle{//use dist();
     this.x+=3*cos(angle);
     this.y+=3*sin(angle);
     rect(this.x,this.y,5,5);
+    if((dist(this.x, this.y, Pvar.x, Pvar.y)<=5)){
+      console.log(dist(this.x, this.y, this.target.x, this.target.y))
+    }
   }
 }
 class missleCluster{
