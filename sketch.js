@@ -7,15 +7,15 @@ var timerText
 function setup() {
   createCanvas(CANVAS_WIDTH, CANVAS_WIDTH);
   Pvar = new player(200,200);
-  Mvar = [new missle(CANVAS_WIDTH,CANVAS_WIDTH,Pvar)];
+  Mvar = [new missle(CANVAS_WIDTH,CANVAS_WIDTH,Pvar,3)];
   Cvar = [new missleCluster(12,Pvar)];
   fire(5000);
-  setInterval(timer,1);
+  setInterval(timer,10);
   time_alive = 0;
 }
 function timer(){
   //time_alive=(Math.round((1000*(time_alive0+0.001))))/1000
-  time_alive +=0.001
+  time_alive +=0.01
 
   if(localStorage.getItem("time")==null){
     localStorage.setItem("time",time_alive);
@@ -38,8 +38,8 @@ function draw() {
     }
   }
   fill(color(0,0,0));
-  timerText = text(time_alive.toFixed(3), 50, 50);
-  HighSocreText = text(Number(localStorage.getItem("time")).toFixed(3),50,70)
+  timerText = text(time_alive.toFixed(2), 50, 50);
+  HighSocreText = text(Number(localStorage.getItem("time")).toFixed(2),50,70)
   fill(color(255,0,0));
 }
 class player{
@@ -84,16 +84,17 @@ class player{
   this.y = constrain(this.y,0,CANVAS_WIDTH-5);
 }
 }
-class missle{//use dist();
-  constructor(x,y,target){ 
+class missle{
+  constructor(x,y,target,speed){ 
     this.x=x+random(-30,30);
     this.y=y+random(-30,30);
     this.target = target;
+    this.speed = speed;
   }
   update(){
     let angle = atan2((this.target.y-this.y),(this.target.x-this.x))
-    this.x+=3*cos(angle);
-    this.y+=3*sin(angle);
+    this.x+=this.speed*cos(angle);
+    this.y+=this.speed*sin(angle);
     rect(this.x,this.y,5,5);
     if((dist(this.x, this.y, Pvar.x, Pvar.y)<=5)){
       console.log(dist(this.x, this.y, this.target.x, this.target.y))
@@ -107,7 +108,7 @@ constructor(num,target){
   this.x = CANVAS_WIDTH*1.5*cos(angle);
   this.y = CANVAS_WIDTH*1.5*sin(angle);
   for(let i = 0; i<num;i++){
-    this.cluster.push(new missle(0,0,this))
+    this.cluster.push(new missle(0,0,this,5))
   }
 }
 }
@@ -129,7 +130,7 @@ function fire(time){
   }
   Cvar.push(new missleCluster(12,Pvar));
   if(random()>0.6){
-    Mvar.push(new missle(CANVAS_WIDTH,CANVAS_WIDTH,Pvar));
+    Mvar.push(new missle(CANVAS_WIDTH,CANVAS_WIDTH,Pvar,3));
   }
   setTimeout(() => fire(newtime), newtime)
   if(Cvar.length > 100){
