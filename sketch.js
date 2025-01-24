@@ -15,8 +15,12 @@ function setup2(){
   Pvar = new player(200,200);
   Mvar = [new missle(CANVAS_WIDTH,CANVAS_WIDTH,Pvar,3)];
   Cvar = [new missleCluster(12,Pvar)];
-  fire(5000);
   time_alive = 0;
+  setTimeout(setup3,6000);
+}
+function setup3(){
+  not_dead = true;
+  fire(5000);
 }
 function timer(){
   //time_alive=(Math.round((1000*(time_alive0+0.001))))/1000
@@ -152,8 +156,4 @@ function decease(){
   Cvar = Cvar.shift();
   not_dead = false;
   setup2();
-  setTimeout(undecease,6000)
 }//TODO handle difficulty reset
-function undecease(){
-  not_dead = true;
-}
