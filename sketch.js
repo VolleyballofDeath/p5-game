@@ -140,4 +140,10 @@ function fire(time){
       Mvar.shift();
   }
 }
-
+function decease(){
+  Mvar = [];
+  Cvar = [];
+  Pvar.x = 200;
+  Pvar.y = 200;
+  
+}
