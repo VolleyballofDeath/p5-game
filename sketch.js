@@ -147,7 +147,6 @@ function decease(){
   Mvar = [];
   Cvar = [new missleCluster(0,Pvar)];
   setup();
-  not_dead = true;
- // setTimeout(decease2,5000);
-}
+  not_dead = true;;
+}//TODO handle difficulty reset
 
