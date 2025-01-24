@@ -4,6 +4,7 @@ var Mvar
 var Cvar
 var time_alive=0;
 var timerText
+var not_dead = true;
 function setup() {
   createCanvas(CANVAS_WIDTH, CANVAS_WIDTH);
   Pvar = new player(200,200);
@@ -97,7 +98,7 @@ class missle{
     this.y+=this.speed*sin(angle);
     rect(this.x,this.y,5,5);
     if((dist(this.x, this.y, Pvar.x, Pvar.y)<=5)){
-      console.log(dist(this.x, this.y, this.target.x, this.target.y))
+      decease();
     }
   }
 }
@@ -132,7 +133,9 @@ function fire(time){
   if(random()>0.6){
     Mvar.push(new missle(CANVAS_WIDTH,CANVAS_WIDTH,Pvar,3));
   }
+  if(not_dead){
   setTimeout(() => fire(newtime), newtime)
+  }
   if(Cvar.length > 100){
   Cvar.shift();
 }
@@ -142,8 +145,9 @@ function fire(time){
 }
 function decease(){
   Mvar = [];
-  Cvar = [];
-  Pvar.x = 200;
-  Pvar.y = 200;
-  
+  Cvar = [new missleCluster(0,Pvar)];
+  setup();
+  not_dead = true;
+ // setTimeout(decease2,5000);
 }
+
