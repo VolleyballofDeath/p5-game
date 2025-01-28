@@ -6,7 +6,7 @@ var time_alive=0;
 var timerText
 var not_dead = true;
 function setup() {
- 
+  randomSeed(99);
   setInterval(timer,10);
   setup2();
 }
@@ -43,13 +43,13 @@ function draw() {
   }
   if(Cvar.length > 0){
     for(let j = 0; j< Cvar.length;j++){
-      for(let i = 0; i< Cvar[0].cluster.length;i++){
-        if(Cvar[j].cluster[i] != undefined){
+      if(Cvar[j].cluster.length >0){
+        for(let i = 0; i< Cvar[0].cluster.length;i++){
           Cvar[j].cluster[i].update();
         }
       }
     }
-}
+  }
   fill(color(0,0,0));
   timerText = text(time_alive.toFixed(2), 50, 50);
   HighSocreText = text(Number(localStorage.getItem("time")).toFixed(2),50,70)
