@@ -1,4 +1,4 @@
-let CANVAS_WIDTH = 800;
+let CANVAS_WIDTH = 1170;
 var Pvar
 var Mvar
 var Cvar
@@ -41,11 +41,15 @@ function draw() {
   for(let i = 0; i< Mvar.length;i++){
   Mvar[i].update();
   }
-  for(let j = 0; j< Cvar.length;j++){
-    for(let i = 0; i< Cvar[0].cluster.length;i++){
-      Cvar[j].cluster[i].update();
+  if(Cvar.length > 0){
+    for(let j = 0; j< Cvar.length;j++){
+      for(let i = 0; i< Cvar[0].cluster.length;i++){
+        if(Cvar[j].cluster[i] != undefined){
+          Cvar[j].cluster[i].update();
+        }
+      }
     }
-  }
+}
   fill(color(0,0,0));
   timerText = text(time_alive.toFixed(2), 50, 50);
   HighSocreText = text(Number(localStorage.getItem("time")).toFixed(2),50,70)
@@ -153,7 +157,7 @@ function fire(time){
 }
 function decease(){
   Mvar = [];
-  Cvar = Cvar.shift();
+  Cvar = [Cvar.shift()];
   not_dead = false;
   setup2();
 }//TODO handle difficulty reset
