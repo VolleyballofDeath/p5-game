@@ -45,7 +45,10 @@ function draw() {
     for(let j = 0; j< Cvar.length;j++){
       if(Cvar[j].cluster.length >0){
         for(let i = 0; i< Cvar[0].cluster.length;i++){
+
+          if(Cvar.length > j){
           Cvar[j].cluster[i].update();
+          }
         }
       }
     }
@@ -136,8 +139,14 @@ class enemy{
     let angle = atan2((this.foe.y-this.y),(this.foe.x-this.x))
   }
 }
+let newtime = 5000;
 function fire(time){
-  let newtime = time*0.95;
+  if(not_dead){
+    setTimeout(() => fire(newtime), newtime)
+    }else{
+      return;
+    }
+  newtime = time*0.95;
   if(newtime<=150){
     newtime = 150;
   }
@@ -145,9 +154,7 @@ function fire(time){
   if(random()>0.6){
     Mvar.push(new missle(CANVAS_WIDTH,CANVAS_WIDTH,Pvar,3));
   }
-  if(not_dead){
-  setTimeout(() => fire(newtime), newtime)
-  }
+
   if(Cvar.length > 100){
   Cvar.shift();
 }
@@ -157,7 +164,13 @@ function fire(time){
 }
 function decease(){
   Mvar = [];
-  Cvar = [Cvar.shift()];
+  if(Cvar.length>=2){
+  Cvar = [Cvar[0],Cvar[1]];
+
+  }else{
+    Cvar = [Cvar[0]];
+  }
   not_dead = false;
+  newtime = 5000;
   setup2();
 }//TODO handle difficulty reset
