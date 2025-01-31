@@ -31,6 +31,9 @@ function timer(){
   }else if(localStorage.getItem("time")<time_alive){
     localStorage.setItem("time",time_alive);
   }
+  if(keyIsDown(16)&&keyIsDown(82)){
+    localStorage.setItem("time",0);
+  }
 }
 function draw() {
   background(220);
@@ -96,6 +99,7 @@ class player{
     this.y-=(1-sin(3*PI/4))*4
     this.x-=(1-cos(PI/4))*4
   }
+
   this.x = constrain(this.x,0,CANVAS_WIDTH-5);
   this.y = constrain(this.y,0,CANVAS_WIDTH-5);
 }
