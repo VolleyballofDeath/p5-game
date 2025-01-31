@@ -35,6 +35,12 @@ function timer(){
     localStorage.setItem("time",0);
   }
 }
+let questiondata = [["what is the capital of Indonesia","Jakarta","Deli","Mumbai","Semarang"],[""]]
+function questioner(){
+
+
+  }
+}
 function draw() {
   background(220);
   Pvar.update();
